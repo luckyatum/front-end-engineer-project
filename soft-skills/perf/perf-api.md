@@ -36,6 +36,3 @@
 5. performance.memory，非标准属性，chrome提供，提供了基本内存使用情况
 6. Performance.mark，在浏览器的performance entry buffer（浏览器资源时间性能缓冲区）中，根据名称生成高精度时间戳。也就是很多人说过的"打点"
 7. Performance.measure，measure是指定两个mark点之间的时间戳。如果说mark可以理解为"打点"的话，measure就可以理解为"连线"
-
-
-
