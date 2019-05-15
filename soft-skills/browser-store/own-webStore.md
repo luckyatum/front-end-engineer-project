@@ -12,4 +12,4 @@
 11. 每次请求，浏览器会添加一个if-none-match字段，值为缓存的etag值，服务端会根据资源计算出一个新的etag值，如果两个值相等，则标识资源没有更新，返回304和空的响应正文，浏览器读取缓存值，如果不相等，标识资源有更新，返回200和新的资源内容，浏览器再次缓存并且更新etag值；
 12. etag优先级高于last-modified，而且精度要高于last-modified，但是因为每次服务器都会进行读写操作，因为要读取资源进行etag值的计算，所以会影响服务器的性能；
 
-缓存过程：强缓存->根据cache-coontrol决定是否使用协商缓存->如果cache-control值不为no-cache或者no-store，则不需要立刻使用协商缓存->而是判断expires是否过期，没过期的话直接读取缓存内容，如果过期，则服务端发起请求->如果cache-control值为no-cache或者no-store，则直接向服务器发起请求->如果存在last-modified值则带上last-modified-since字段，如果存在etag值则带上if-none-match字段，后者优先级更高->服务端根据两个字段存在与否，如果存在if-none-match,则计算etag比较，一致的话返回304，不一致返回新的内容和200->如果只存在last-modified-since，则根据时间判断是否过期，没有过期返回304，过期返回新的资源正文和200->浏览器根据响应决定读取缓存或者更新资源
+缓存过程：强缓存->根据cache-control决定是否使用协商缓存->如果cache-control值不为no-cache或者no-store，则不需要立刻使用协商缓存->而是判断expires是否过期，没过期的话直接读取缓存内容，如果过期，则服务端发起请求->如果cache-control值为no-cache或者no-store，则直接向服务器发起请求->如果存在last-modified值则带上last-modified-since字段，如果存在etag值则带上if-none-match字段，后者优先级更高->服务端根据两个字段存在与否，如果存在if-none-match,则计算etag比较，一致的话返回304，不一致返回新的内容和200->如果只存在last-modified-since，则根据时间判断是否过期，没有过期返回304，过期返回新的资源正文和200->浏览器根据响应决定读取缓存或者更新资源

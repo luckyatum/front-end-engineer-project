@@ -14,6 +14,3 @@
     * etag优先级高于last-modified，表示资源在服务端的唯一标识（资源修改时间戳的哈希值或者版本号等等），同样，浏览器请求资源时候获取到该值缓存，下次请求添加if-none-match，服务器新生成etag跟请求的etag值对比，如果一致的话，表示缓存可以使用，于是返回304，如果不一致，则返回新的内容和200状态码；
 5. 缓存流程总结
 ![缓存流程](https://mmbiz.qpic.cn/mmbiz_png/JfTPiahTHJhqVtDasiaFuX5eXIuzGCZQ2Cwd652rG3h0mJeo2aRAZYHR2423qSW0vyKC3LNzprx59d1ibIB2X9MGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-
-
-
