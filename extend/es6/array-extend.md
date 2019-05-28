@@ -140,4 +140,3 @@ for(let i of [2, 3, 4].entries()) {
 includes(),返回数组是否包含某个值
 
 该方法对比indexOf方法的好处是：1.更加语义化；2.不会造成对NaN值的误判
-
