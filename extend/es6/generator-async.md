@@ -49,7 +49,101 @@ return result.value.then(function(data) {
 
 ## Thunk函数
 
-还没看懂...
+Thunk函数是自动执行Generator函数的一种方式
+
+Thunk函数替换函数参数，将多参函数替换成一个只接受回调函数作为参数的单参数函数
+
+```js
+// 正常版本的readFile
+fs.readFile(fileName, callback);
+// Thunk版本的readFile
+var Thunk = function(fileName) {
+    return function(callback) {
+        return fs.readFile(fileName, callback);
+    };
+};
+var readFileThunk = Thunk(fileName);
+readFileThunk(callback);
+```
+
+下面是一个简单的Thunk函数转换器
+
+```js
+const Thunk = function(fn) {
+    return function(...args) {
+        return function(callback) {
+            return fn.call(this, ...args, callback);
+        }
+    }
+};
+// 使用上述转换器生成fs.readFile的Thunk函数
+const readFileThunk = Thunk(fs.readFile);
+readFileThunk(fileName)(callback);
+```
+
+## Thunk用于Generator函数的自动管理流程
+
+下面是一个可以自动执行的gen
+
+```js
+function* gen() {
+    // ...
+}
+var g = gen();
+var res = g.next();
+
+while(!res.done) {
+    console.log(res.value);
+    res = g.next();
+}
+```
+
+但是，上述代码不适合异步操作，下面是Thunk的例子
+
+```js
+var readFileThunk = thunk(fs.readFile);
+var gen = function* () {
+    var r1 = yield readFileThunk('test.txt');
+    console.log(r1.toString());
+    var r2 = yield readFileThunk('test2.txt');
+    console.log(r2.toString());
+}
+var g = gen();
+var r1 = g.next();
+r1.value(function(err, data) {
+    if (err) throw err;
+    var r2 = g.next(data);
+    r2.value(function(err, data) {
+        if (err) throw err;
+        g.next(data);
+    })
+})
+```
+
+变量g是Generator函数的内部指针，表明目前执行到哪一步，next方法负责将指针移动到下一步，并返回该步的信息
+
+上述代码可以发现Generator函数执行过程其实是将同一个回调函数反复传入next方法的value属性
+
+下面是一个基于Thunk函数的Generator执行器的例子
+
+```js
+function run(fn) {
+    var gen = fn();
+
+    function next(err, data) {
+        var result = gen.next(data);
+        if (result.done) return;
+        result.value(next);
+    }
+    next();
+}
+
+function* g() {}
+
+run(g);
+```
+
+上述代码中，run就是一个执行器，内部的Next函数就是Thunk的回调函数，next函数先将指针移到generator函数的下一步（gen.next方法），然后判断Generator函数是否结束（result.done属性），如果没结束，就将next函数再传入Thunk函数（result.value属性），否则就直接退出
 
 ## co模块
 
