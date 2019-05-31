@@ -138,13 +138,67 @@ function run(fn) {
     next();
 }
 
-function* g() {}
+function* g() {
+    var f1 = yield readFile('fileA');
+    var f2 = yield readFile('fileB');
+}
 
 run(g);
 ```
 
 上述代码中，run就是一个执行器，内部的Next函数就是Thunk的回调函数，next函数先将指针移到generator函数的下一步（gen.next方法），然后判断Generator函数是否结束（result.done属性），如果没结束，就将next函数再传入Thunk函数（result.value属性），否则就直接退出
 
+有了run执行器，只需要把generator函数放入run中即可，但是g函数里面的yield表达式必须是Thunk函数，因为每次在next函数里面都是通过result.value(next)执行下一步的操作的
+
 ## co模块
 
-还没看懂...
+co模块用于generator函数的自动执行
+
+```js
+// 下面是一个Promise的自动执行例子
+var fs = require('fs');
+
+// 将fs.readFile封装成Promise对象
+var readFile = function(fileName) {
+    return new Promise(function(resolve, reject) {
+        fs.readFile(fileName, function(error, data) {
+            if (error) reject(error);
+            resolve(data);
+        });
+    });
+}
+
+var gen = function* () {
+    var f1 = readFile('test.txt');
+    var f2 = readFile('test2.txt');
+}
+
+// 手动执行
+var g = gen();
+g.next().value.then(function(data) {
+    g.next(data).value.then(function(data) {
+        g.next(data);
+    });
+});
+```
+
+上述自动执行其实就是在then回调里面执行g.next()方法，然后把data传进去，下面是一个自动执行器
+
+```js
+function run(fn) {
+    var g = fn();
+
+    function next(data) {
+        var result = g.next(data);
+        if (result.done) return;
+        result.value.then(function(data) {
+            next(data);
+        });
+    }
+    next();
+}
+
+run(gen);
+```
+
+上面代码原理其实跟Thunk一致，只是把回调函数的执行改成了Promise对象的then函数
