@@ -104,3 +104,127 @@ export default class widget {
 ## 私有属性
 
 es6不支持私有属性，目前有提案是在变量前加#标记为私有属性
+
+## this指向
+
+类的内部使用this，将会默认指向类的实例，但是如果单独使用该方法，会出错
+
+```js
+class Logger {
+    printName (name = 'there') {
+        this.print(`hello ${name}`);
+    }
+
+    print(text) {
+        console.log(text);
+    }
+}
+
+var log = new Logger();
+const {printName} = log;
+printName(); // error
+```
+
+解决方案一是构造函数中绑定该方法的this
+
+```js
+class Logger {
+    constructor () {
+        this.printName = this.printName.bind(this);
+    }
+    // ...
+}
+```
+
+解决方案二是使用箭头函数
+
+```js
+class Logger {
+    constructor() {
+        this.printName = (name = 'there') => {
+            this.print(`hello ${name}`);
+        };
+    }
+    // ...
+}
+```
+
+类的内部可以使用get和set关键字对某个属性设置存值函数和取值函数，用于拦截该属性的存取行为
+
+```js
+class MyClass {
+    constructor() {
+        // ...
+    }
+    get prop() {
+        return 'getter';
+    }
+    set prop(value) {
+        console.log(`setter: ${value}`);
+    }
+}
+```
+
+如果某个方法前加上星号（*），表示该方法是一个Generator函数
+
+```js
+class Foo {
+    constructor(...args) {
+        this.args = args;
+    }
+    *[Symbol.iterator]() {
+        for(let arg of this.args) {
+            yield arg;
+        }
+    }
+}
+```
+
+## class的静态方法
+
+如果在类的方法前加上一个static，该方法不会被实例所继承，而是直接通过类调用
+
+```js
+class Foo {
+    static classMethod() {
+        console.log('static');
+    }
+}
+Foo.classMethod(); // static
+```
+
+父类静态方法可以被子类继承
+
+```js
+class Foo {
+    static classMethod() {
+        console.log('父亲');
+    }
+}
+
+class Son extends Foo {
+}
+Son.classMethod(); // 父亲
+```
+
+子类还可以从super对象调用
+
+```js
+class Foo {
+    static classMethod() {
+        return 'father';
+    }
+}
+class Son extends Foo {
+    static classMethod() {
+        return super.classMethod() + ',foo';
+    }
+}
+Son.classMethod(); // father,foo
+```
+
+类暂无静态属性
+
+## new.target属性
+
+构造函数内部，可以使用new.target获取当前构造函数的名称，如果不是通过new调用的，那么会返回undefined，可以通过这个属性得知当前构造函数的调用方式，class构造函数内部使用new.target，返回当前class名称
