@@ -222,4 +222,3 @@ export default function(x) {
 上面的circleplus输出了所有的circle模块属性方法，export * 命令会忽略circle模块的default方法
 
 *目前有一个提案是使用import()作为运行时加载
-
