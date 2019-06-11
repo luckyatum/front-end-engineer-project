@@ -79,8 +79,8 @@ let obj = {
     [key1]() {},
     [key2]() {}
 };
-obj[key1],name; // 'description'
-obj[key2],name; // ''
+obj[key1].name; // 'description'
+obj[key2].name; // ''
 ```
 
 Object.is()，用于比较两个值是否严格相等，与'==='行为基本一致
