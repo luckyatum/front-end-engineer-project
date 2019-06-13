@@ -20,5 +20,3 @@
     * 首屏统计方法二，对于网页高度小于屏幕的网站，只需要在页面底部加上脚本打印当前时间，网页高度大于一屏的话需要在大约一屏元素位置打印时间，这个时间需要加载首屏所有图片加载时间,缺点是每个页面都需要手动加入对应位置，背景图片没有计算在内
     * **用户可操作时间**，默认使用domready时间，performance.timing.domInteractive - performance.timing.navigationStart
     * **总下载时间**，默认统计onload时间，performance.timing.loadEventStart- performance.timing.navigationStart
-
-

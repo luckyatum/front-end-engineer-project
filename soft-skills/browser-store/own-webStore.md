@@ -3,7 +3,7 @@
 1. 浏览器缓存分为强缓存和协商缓存；
 2. 强缓存通过expires标识资源是否过期，expires表示资源过期时间，其值等于max-age + 请求时间,需要客户端和服务端时间高度统一；
 3. cache-control同样用于标识资源缓存，优先级比expires更高；
-5. cache-control的取值可以是public private no-cache no-store max-age，public表示浏览器和服务端都可以缓存资源，private表示浏览器可以缓存资源，no-cache表示浏览器都会发起请求到服务端，服务端通过协商缓存标识决定是返回新内容还是允许浏览器读取缓存，no-store则表示无论什么时候都不会缓存内容，max-age则表示在这个时间段内都是可以使用缓存；
+4. cache-control的取值可以是public private no-cache no-store max-age，public表示浏览器和服务端都可以缓存资源，private表示浏览器可以缓存资源，no-cache表示浏览器都会发起请求到服务端，服务端通过协商缓存标识决定是返回新内容还是允许浏览器读取缓存，no-store则表示无论什么时候都不会缓存内容，max-age则表示在这个时间段内都是可以使用缓存；
 6. 协商缓存，通过last-modified和etag标识缓存是否过期；
 7. 请求到达服务器后，服务器在返回资源的同时，还会返回last-modified标识，表示资源最后修改时间；
 8. 浏览器把last-modified缓存起来，下次请求时候添加last-modified-since字段，值就是缓存的last-modified值；

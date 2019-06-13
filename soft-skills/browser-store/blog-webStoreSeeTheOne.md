@@ -1,6 +1,5 @@
 # [浏览器缓存看这一篇就够了](https://mp.weixin.qq.com/s/q0SGphiRncLldo7CFJO9GQ)
 
-
 1. 缓存机制
     * 浏览器发送请求前，根据请求头的expires(响应实体报头)和cache-control(请求报头)强策略缓存，判断是否过期，如果命中则读取缓存内容；
     * 如果没有命中，则发送请求，根据last-modified和etag判断是否命中协商缓存，如果命中直接从缓存获取，否则从服务器获取；
@@ -27,6 +26,3 @@
     * etag是http协议提供的一种web缓存验证机制，允许客户端进行缓存协商；etag生成方法通常是使用最近修改的时间戳的哈希值，或者是版本号；
     * etag和last-modified一样，在请求后会由浏览器缓存起来，下次请求头中会带上if-none-match: (缓存的etag的值)，服务端会重新生成etag值，两者对比决定是否资源更新；
     * etag的每次服务端生成都需要读写操作，会耗费比较多的服务器资源，而last-modified只需要读取操作；但是etag的精确度会高于last-modified;
-    
-
-
