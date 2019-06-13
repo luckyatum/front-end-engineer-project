@@ -53,8 +53,8 @@ let {foo: foo} = { foo: 'aaa', bar: 'bbb' };
 // 即
 
 let {foo: baz} = { foo: 'aaa', bar: 'bbb' };
-// baz 'aaa'
-// foo error foo is not defined
+baz // 'aaa'
+foo // error foo is not defined
 ```
 
 所以，对象解构赋值真正被赋值的是后面的变量baz
