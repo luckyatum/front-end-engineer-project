@@ -100,7 +100,70 @@ var selfReduce = function(fn, initialValue) {
     var startIndex;
     if (initValue === undefined) {
         // 找到第一个非空单元（真实）的元素和下标
-        
+        for(var i = 0;i < arr.length;i++) {
+            if (!arr.hasOwnProperty(i)) continue;
+            startIndex = i;
+            res = arr[i];
+            break;
+        }
+    } else {
+        res = initialValue;
     }
+
+    for(var i = ++startIndex || 0;i < arr.length;i++) {
+        if (!arr.hasOwnProperty(i)) continue;
+        res = fn.call(null, res, arr[i], i, this);
+    }
+    return res;
+}
+```
+
+## 8.使用 reduce 实现数组的 flat 方法
+
+```js
+var selfFlat = function(depth) {
+    depth = depth || 1; // 默认为1
+    if (depth == 0) return arr;
+    return arr.reduce((pre, cur) => {
+        if (Array.isArray(cur)) {
+            return [...pre, ...selfFlat.call(cur, depth - 1)];
+        } else {
+            return [...pre, cur];
+        }
+    }, []);
+}
+```
+
+## 9.实现es6的class语法
+
+```js
+function inherit(subType, superType) {
+    subType.prototype = Object.create(superType.prototype, {
+        constructor: {
+            enumerable: false,
+            configurable: true,
+            writeable: true,
+            value: superType
+        }
+    });
+    Object.setPrototypeOf(subType, superType);
+}
+```
+
+## 10.函数柯里化
+
+```js
+function curry(fn) {
+    if (fn.length <= 1) return fn;
+    var generator = (...args) => {
+        if (fn.length === args.length) {
+            return fn(...args);
+        } else {
+            return (...args2) => {
+                return generator(...args, ...args2);
+            }
+        }
+    };
+    return generator;
 }
 ```
