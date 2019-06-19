@@ -214,3 +214,39 @@ var app = new App({
 ```
 
 如果接收的数据是驼峰命名的，在父组件上需要使用小写中横杠传递，因为存在html不区分大小写的问题，但是在字符串模板中没有该限制
+
+当props需要验证时，就需要对象写法
+
+```js
+Vue.component('my-component', {
+    props: {
+        // 必须是数组类型
+        propA: Number,
+        // 必须是字符串或者数字类型
+        propB: [String, Number],
+        // 布尔值，如果没有定义默认true
+        propC: {
+            type: Boolean,
+            default: true
+        },
+        // 数字，而且是必传
+        propD: {
+            type: Number,
+            required: true
+        },
+        // 如果是数组或对象，默认值必须是一个函数来返回
+        propE: {
+            type: Array,
+            default: function() {
+                return [];
+            }
+        },
+        // 自定义一个验证函数
+        propF: {
+            validator: function(value) {
+                return value > 10;
+            }
+        }
+    }
+});
+```
