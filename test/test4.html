@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .parent {
+            width: 600px;
+            margin-bottom: 50px;
+            background-color: aqua;
+        }
+        .left {
+            width: 200px;
+            background-color: yellow;
+        }
+        .right {
+            background-color: violet;
+        }
+
+
+
+
+        .left1 {
+            display: inline-block;
+        }
+        .right1 {
+            display: inline-block;
+            /* width: calc(100% - 200px); */
+            width: 100%;
+            margin-left: -200px;
+        }
+
+
+
+
+
+        .parent2:after {
+            content: "";
+            display: block;
+            overflow: hidden;
+            clear: both;
+        }
+        .left2 {
+            float: left;
+        }
+        .right2 {
+            width: 100%;
+        }
+
+
+
+
+
+        .parent3 {
+            display: flex;
+        }
+        .right3 {
+            flex: 1;
+        }
+
+
+
+
+
+
+
+        .parent4 {
+            position: relative;
+        }
+        .left4 {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .right4 {
+            width: 100%;
+            padding-left: 200px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!-- inline-block -->
+    <div class="parent parent1">
+        <div class="left left1">定宽200</div><div class="right right1">自适应</div>
+    </div>
+    <!-- float -->
+    <div class="parent parent2">
+        <div class="left left2">定宽200</div>
+        <div class="right right2">自适应</div>
+    </div>
+    <!-- flex -->
+    <div class="parent parent3">
+        <div class="left left3">定宽200</div>
+        <div class="right right3">自适应</div>
+    </div>
+    <!-- position -->
+    <div class="parent parent4">
+        <div class="left left4">定宽200</div>
+        <div class="right right4">自适应</div>
+    </div>
+</body>
+</html>
