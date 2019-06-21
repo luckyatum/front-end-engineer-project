@@ -8,11 +8,9 @@ vuex设计用来统一管理组件状态，可以实现跨组件共享数据，�
 // 安装 npm install --save vuex
 // main.js引入
 import Vue from 'vue';
-import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import App from './app.vue';
 
-Vue.use(VueRouter);
 Vue.use(Vuex);
 
 // vuex配置
@@ -23,7 +21,6 @@ const store = new Vuex.Store({
 // 新建Vue实例
 new Vue({
     el: '#app',
-    router: router,
     // 使用vuex
     store: store,
     render: h => {
