@@ -73,4 +73,40 @@ vue-router有两种跳转页面的方法：
 
     * tag 指定渲染成什么标签如tag="li"，渲染结果就是li而不是a
     * replace 使用replace不会留下history记录，所以导航后不能用后退键返回上一个页面
-    * active-class
+    * active-class 路由匹配成功时，会自动为当前元素设置一个名为router-link-active的class，设置prop:active-class可以修改默认名称
+
+2. 在js代码里面跳转，使用this.$router.push()方法
+
+    ```js
+        this.$router.push('/user/123');
+    ```
+
+    $router还有别的方法，replace和go
+
+## 导航钩子
+
+vue-router提供了导航钩子beforeEach和afterEach，分别在路由改变前和改变后触发，可以在beforeEach中设置标题等信息变更
+
+```js
+    const Routes = [
+        {
+            path: '/index',
+            meta: {
+                title: '首页'
+            },
+            component: (resolve) => require(['./views/index.vue'], resolve)
+        }
+    ]
+
+    const router = new VueRouter(RouterConfig);
+    // 通过beforeEach钩子修改页面标题
+    router.beforeEach((to, from, next) => {
+        window.document.title = to.meta.title;
+        next(); // 调用该方法才能进入下一个钩子
+    });
+    // 通过afterEach钩子使滚动条回到顶端
+    router.afterEach((to, from, next) => {
+        window.scrollTop(0, 0);
+    });
+```
+
