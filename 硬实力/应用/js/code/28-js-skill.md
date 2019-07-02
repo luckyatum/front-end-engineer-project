@@ -5,7 +5,7 @@
 ```js
 const isType = type => target => `[object ${type}]` === Object.prototype.toString.call(target);
 const isArray = isType('Array');
-console.log(isArray[]); // true
+console.log(isArray([])); // true
 ```
 
 ## 2. es5实现数组map方法
@@ -94,7 +94,7 @@ var selfSome = function(fn, context) {
 ## 7.es5实现数组的reduce方法
 
 ```js
-var selfReduce = function(fn, initialValue) {
+var selfReduce = function(fn, initValue) {
     var arr = Array.prototype.slice.call(this);
     var res;
     var startIndex;
@@ -107,7 +107,7 @@ var selfReduce = function(fn, initialValue) {
             break;
         }
     } else {
-        res = initialValue;
+        res = initValue;
     }
 
     for(var i = ++startIndex || 0;i < arr.length;i++) {
