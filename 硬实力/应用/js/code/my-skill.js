@@ -1,16 +1,10 @@
-/**
- * 寄生组合式
- * 
- */
-function Parent() {
-    this.colors = ['a', 'b'];
+function ajax(url, method) {
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+    xhr.open(method, url, true); // 是否异步
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log(xhr.responseText);
+        }
+    }
 }
-Parent.prototype.print = function() {};
-
-function Son() {
-    Parent.call(this);
-}
-
-var proto = Object.create(Parent.prototype);
-proto.constructor = Son;
-Son.prototype = proto;
