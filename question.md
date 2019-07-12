@@ -163,7 +163,18 @@ $8.你了解的ES6只是const、let、promise吗？你考虑过ES6提出的真�
 45.原生ajax写法
 
     ```js
-
+        function ajax(url) {
+            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHttp');
+            xhr.open('get', url, true);
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(xhr.responseTEXT);
+                    }
+                }
+            }
+        }
     ```
 
 46.图片懒加载
