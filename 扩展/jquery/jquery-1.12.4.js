@@ -13,6 +13,11 @@
  * 
  * 中文注释：luckyatum
  * 
+ * 参考链接：
+ * https://github.com/chokcoco/jQuery-/blob/master/jquery-1.10.2__read.js --github start项目
+ * https://github.com/songjinzhong/JQuerySource --github start项目
+ * http://rapheal.sinaapp.com/2013/01/31/jquery-src-obj/ --个人博客项目
+ * 
  * last-update: 2019-07-12
  */
 
