@@ -181,7 +181,7 @@ $8.你了解的ES6只是const、let、promise吗？你考虑过ES6提出的真�
 
 47.双列布局，三列布局，圣杯布局，双飞翼布局
 
-48.vue的双向绑定原理，生命周期，父子通信，跨组件通信，vuex，vue-router
+48.vue的双向绑定原理，生命周期，父子通信，跨组件通信，vuex，vue-router，懒加载组件
 
 49.GET和POST区别
 

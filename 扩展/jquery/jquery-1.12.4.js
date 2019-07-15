@@ -116,14 +116,23 @@ var
 		return letter.toUpperCase();
 	};
 
+/**
+ * 给jQuery.prototype设置别名jQuery.fn
+ * 挂载在jQuery.prototype上的方法，即可让所有jQuery对象使用
+ */
 jQuery.fn = jQuery.prototype = {
 
 	// The current version of jQuery being used
 	jquery: version,
 
+    /**
+     * 将jQuery的原型的constructor重新指回jQuery
+     * 因为直接使用对象方式重写了jQuery的原型，如果不设置该属性的话会默认指向Object
+     */
 	constructor: jQuery,
 
-	// Start with an empty selector
+    // Start with an empty selector
+    
 	selector: "",
 
 	// The default length of a jQuery object is 0
@@ -2891,6 +2900,9 @@ var rootjQuery,
 	// Strict HTML recognition (#11290: must start with <)
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
 
+    /**
+     * 初始化方法，构造jQuery对象最后实际上是调用的这个方法(new jQuery.fn.init(selector, context, rootjQuery))
+     */
 	init = jQuery.fn.init = function( selector, context, root ) {
 		var match, elem;
 
@@ -2905,21 +2917,24 @@ var rootjQuery,
 
 		// Handle HTML strings
 		if ( typeof selector === "string" ) {
+            // 相当于正则式/^<\.+>$/，即匹配以'<'开始，以'>'结尾，且长度大于3的字符串
 			if ( selector.charAt( 0 ) === "<" &&
 				selector.charAt( selector.length - 1 ) === ">" &&
 				selector.length >= 3 ) {
 
-				// Assume that strings that start and end with <> are HTML and skip the regex check
+                // Assume that strings that start and end with <> are HTML and skip the regex check
+                // 如果selector是html标签的话，match组成直接如下
 				match = [ null, selector, null ];
 
 			} else {
 				match = rquickExpr.exec( selector );
 			}
 
-			// Match html or make sure no context is specified for #id
+            // Match html or make sure no context is specified for #id
 			if ( match && ( match[ 1 ] || !context ) ) {
 
-				// HANDLE: $(html) -> $(array)
+                // HANDLE: $(html) -> $(array)
+                // match[1] 为 true 的情况，是上面的这一句 match = [ null, selector, null ]
 				if ( match[ 1 ] ) {
 					context = context instanceof jQuery ? context[ 0 ] : context;
 
