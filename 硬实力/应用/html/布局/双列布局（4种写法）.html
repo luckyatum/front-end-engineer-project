@@ -1,0 +1,175 @@
+<!-- 双列布局含义-拖动窗口时，窗口左边不动，右边自适应 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>布局-双列布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .way {
+            margin-top: 100px;
+            width: 100%;
+            height: 500px;
+        }
+        .way:first-child {
+            margin-top: 50px;
+        }
+
+        .way-title {
+            margin-bottom: 10px;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        /* 方法一-calc计算 */
+        .way-1-main {
+            width: 100%;
+            height: 470px;
+            min-width: 220px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-1-left {
+            display: inline-block;
+            width: 200px;
+            height: 100%;
+            background-color: aqua;
+        }
+        .way-1-right {
+            display: inline-block;
+            width: calc(100% - 200px);
+            height: 100%;
+            background-color: bisque;
+        }
+
+        /* 方法二-浮动 */
+        .way-2-main {
+            width: 100%;
+            height: 470px;
+            min-width: 220px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-2-main:after {
+            content: "";
+            display: block;
+            overflow: hidden;
+            clear: both;
+        }
+        .way-2-left {
+            float: left;
+            width: 200px;
+            height: 100%;
+            background-color: aqua;
+        }
+        .way-2-right {
+            display: block;
+            height: 100%;
+            background-color: bisque;
+        }
+
+        /* 写法三-绝对定位 */
+        .way-3-main {
+            position: relative;
+            width: 100%;
+            height: 470px;
+            min-width: 220px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-3-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background-color: aqua;
+        }
+        .way-3-right {
+            padding-left: 200px;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: bisque;
+        }
+
+        /* 写法四-flex布局 */
+        .way-4-main {
+            display: flex;
+            width: 100%;
+            height: 470px;
+            min-width: 220px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-4-left {
+            width: 200px;
+            height: 100%;
+            background-color: aqua;
+        }
+        .way-4-right {
+            flex: 1;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <!-- 写法一-calc计算
+        左右侧设置display: inline-block;
+        左侧设置宽度，右侧设置width: calc(100% - 200px);
+        同时因为inline-block会有间距，所以左右侧标签必须连在一起写，中间不能有空格或者换行。
+    -->
+    <div class="way">
+        <h4 class="way-title">方法一-calc计算</h4>
+        <div class="way-1-main">
+            <div class="way-1-left"></div><div class="way-1-right"></div>
+        </div>
+    </div>
+
+    <!-- 写法二-浮动
+        左侧设置左浮动，宽度；
+        右侧display: block;
+    -->
+    <div class="way">
+        <h4 class="way-title">方法二-浮动</h4>
+        <div class="way-2-main">
+            <div class="way-2-left"></div>
+            <div class="way-2-right"></div>
+        </div>
+    </div>
+
+    <!-- 写法三-绝对定位
+        父元素相对定位
+        左侧绝对定位，设置宽度；
+        右侧设置宽度100%，padding-left: 200px;box-sizing: border-box;
+    -->
+    <div class="way">
+        <h4 class="way-title">写法三-绝对定位</h4>
+        <div class="way-3-main">
+            <div class="way-3-left"></div>
+            <div class="way-3-right"></div>
+        </div>
+    </div>
+    
+    <!-- 写法四-flex布局
+        父元素设置display: flex;
+        左侧设置宽度；
+        右侧设置flex: 1;
+    -->
+    <div class="way">
+        <h4 class="way-title">写法四-flex布局</h4>
+        <div class="way-4-main">
+            <div class="way-4-left"></div>
+            <div class="way-4-right"></div>
+        </div>
+    </div>
+
+</body>
+</html>
