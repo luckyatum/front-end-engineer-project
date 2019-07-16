@@ -15,6 +15,7 @@
             margin-top: 100px;
             width: 100%;
             height: 500px;
+            min-width: 700px;
         }
         .way:first-child {
             margin-top: 50px;
@@ -42,7 +43,6 @@
         .way-1-main {
             width: 100%;
             height: 470px;
-            min-width: 220px;
             border: 10px solid pink;
             box-sizing: border-box;
         }
@@ -60,7 +60,6 @@
             position: relative;
             width: 100%;
             height: 470px;
-            min-width: 220px;
             border: 10px solid pink;
             box-sizing: border-box;
         }
@@ -87,7 +86,6 @@
             position: relative;
             width: 100%;
             height: 470px;
-            min-width: 220px;
             border: 10px solid pink;
             box-sizing: border-box;
         }
@@ -112,7 +110,6 @@
             display: flex;
             width: 100%;
             height: 470px;
-            min-width: 530px;
             border: 10px solid pink;
             box-sizing: border-box;
         }
@@ -130,7 +127,6 @@
         .way-5-main {
             width: 100%;
             height: 470px;
-            min-width: 530px;
             border: 10px solid pink;
             box-sizing: border-box;
         }
@@ -145,6 +141,29 @@
         .way-5-right {
             display: inline-block;
             width: 300px;
+        }
+
+        /* 方法六-圣杯布局 */
+        .way-6-main {
+            padding: 0 300px 0 200px;
+            height: 470px;
+            border: 10px solid pink;
+        }
+        .way-6-center {
+            float: left;
+            width: 100%;
+        }
+        .way-6-left {
+            float: left;
+            position: relative;
+            right: 200px;
+            margin-left: -100%;
+            width: 200px;
+        }
+        .way-6-right {
+            float: left;
+            width: 300px;
+            margin-right: -300px;
         }
     </style>
 </head>
@@ -212,8 +231,23 @@
     -->
     <div class="way">
         <h4 class="way-title">方法五-inline-block</h4>
+
         <div class="way-5-main">
             <div class="way-5-left way-left">1</div><div class="way-5-center way-center">2</div><div class="way-5-right way-right">3</div>
+        </div>
+    </div>
+    <!-- 方法六-圣杯布局
+        center标签设置在dom结构最前方，设置width: 100%;float: left;
+        left设置float:left;margin-left:-100%;position:relative;right:200px;width:200px;
+        right设置float:right;margin-right:-150px;
+    -->
+    <div class="way">
+        <h4 class="way-title">方法六-圣杯布局</h4>
+
+        <div class="way-6-main">
+            <div class="way-6-center way-center">2</div>
+            <div class="way-6-left way-left">1</div>
+            <div class="way-6-right way-right">3</div>
         </div>
     </div>
 </body>
