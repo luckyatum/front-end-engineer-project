@@ -1,0 +1,42 @@
+<!-- 双飞翼dom结构和圣杯布局类似，区别在于，container仅包裹住center，同时column类从center移到container -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双飞翼布局</title>
+    <style>
+        .container {
+            width: 100%;
+            height: 600px;
+        }
+        .column {
+            float: left;
+            min-height: 600px;
+        }
+        .center {
+            margin: 0 150px 0 200px;
+            min-height: 600px;
+            background-color: yellow;
+        }
+        .left {
+            width: 200px;
+            margin-left: -100%;
+            background-color: aqua;
+        }
+        .right {
+            width: 150px;
+            margin-left: -150px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="container column">
+        <div class="center"></div>
+    </div>
+    <div class="left column"></div>
+    <div class="right column"></div>
+</body>
+</html>
