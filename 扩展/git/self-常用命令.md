@@ -32,27 +32,27 @@
 > * 列出repository配置：git config --local --list;
 > * 列出全局配置：git config --global --list;
 > * 列出系统配置：git config --system --list;
-> * 
+>
 > * 配置用户名：git config --global user.name "your name";
 > * 配置用户邮箱：git config --global user.email "youremail@github.com";
-> * 
+>
 > * 配置解决冲突时使用哪种差异分析工具，比如要使用vimdiff：git config --global merge.tool vimdiff;
 > * 配置git命令输出为彩色的：git config --global color.ui auto;
 > * 配置git使用的文本编辑器：git config --global core.editor vi;
-> * 
+>
 > * 创建一个新的本地仓库：git init；
 > * 从远程git仓库复制项目：git clone 'url'
 > * 从远程git仓库复制项目后指定新的项目名：git clone git://github.com/wasd/example.git mygit；
-> * 
+>
 > * 提交工作区所有文件到暂存区：git add .
 > * 提交工作区中指定文件到暂存区：git add 'file1' 'file2' ...;
 > * 提交工作区中某个文件夹中所有文件到暂存区：git add [dir];
-> * 
+>
 > * 删除工作区文件，并且也从暂存区也删除对应文件的记录：git rm 'file1' 'file2';
 > * 从暂存区中删除文件，但是工作区依然还有该文件:git rm --cached 'file';
 > * 取消暂存区已经暂存的文件：git reset HEAD 'file'...;
 > * 撤销上一次对文件的操作：git checkout --'file'。
-> * 
+>
 > * 隐藏当前变更，以便能够切换分支：git stash；
 > * 查看当前所有的储藏：git stash list；
 > * 应用最新的储藏：git stash apply；
@@ -60,14 +60,16 @@
 > * 重新应用被暂存的变更，需要加上--index参数：git stash apply --index;
 > * 使用apply命令只是应用储藏，而内容仍然还在栈上，需要移除指定的储藏：git stash drop stash{0};
 > * 如果使用pop命令不仅可以重新应用储藏，还可以立刻从堆栈中清除：git stash pop;
-> * 
+>
 > * 应用储藏的修改，在进行了一些其他的修改后，又要取消之前所应用储藏的修改： git stash show -p stash@{0} | git apply -R；
 > * 如果沒有指定具体的某个储藏，Git 会选择最近的储藏：git stash show -p | git apply -R；
-> * 
 > * 重命名文件，并将已改名文件提交到暂存区：git mv [file-original] [file-renamed];
 > * 查询当前工作区所有文件的状态：git status;
 > * 比较工作区中当前文件和暂存区之间的差异，也就是修改之后还没有暂存的内容：git diff；
 > * 指定文件在工作区和暂存区上差异比较：git diff 'file-name';
+>
+> * 添加本地文件不提交到远程仓库（不设置gitignore）：git update-index --assume-unchanged FILENAME
+> * 恢复本地文件不提交到远程仓库（不设置gitignore）：git update-index --no-assume-unchanged FILENAME
 
 ## 提交文件到版本库
 
