@@ -163,14 +163,14 @@ $8.你了解的ES6只是const、let、promise吗？你考虑过ES6提出的真�
 45.原生ajax写法
 
     ```js
-        function ajax(url) {
+        function ajax(url, callback) {
             var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHttp');
             xhr.open('get', url, true);
             xhr.send();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        console.log(xhr.responseTEXT);
+                        callback(xhr.responseTEXT);
                     }
                 }
             }
@@ -208,6 +208,10 @@ $8.你了解的ES6只是const、let、promise吗？你考虑过ES6提出的真�
 51.DOM操作——怎样添加、移除、移动、复制、创建和查找节点。
 
 52.事件——怎样使用事件以及IE和DOM事件模型之间存在哪些主要差别。
+
+* ie事件模型绑定方式和解绑方式不一样；
+* 事件对象里面的常用属性不一样；
+* ie事件阶段只有处理阶段和冒泡阶段，没有捕获阶段。
 
 53.XMLHttpRequest——这是什么、怎样完整地执行一次GET请求、怎样检测错误。
 
