@@ -8,4 +8,56 @@ webpack可以看成是模块打包机，它做的事情是：分析项目结构�
 
 ## 几个常见的loader
 
-* file-loader: 把文件输出到一个文件夹中，
+* file-loader: 把文件输出到一个文件夹中，代码中通过相对url去引用输出的文件
+* url-loader: 类似file-loader，但是能在文件很小的情况下以base64的方式把文件内容注入到代码中
+* source-map-loader: 加载额外的source map文件，以方便断点调试
+* image-loader: 加载并且压缩图片文件
+* babel-loader: 把es6转换成es5
+* css-loader: 加载css，支持模块化，压缩，文件导入等特性
+* style-loader: 把css代码注入到js中，通过dom操作去加载css
+* eslint-loader: 通过eslint检查js代码
+
+## 几个常见的plugin
+
+* define-plugin: 定义环境变量
+* terser-webpack-plugin: 通过terserPlugin压缩es6代码
+* html-webpack-plugin: 为html文件中引入的外部资源，可以生成创建html入口文件
+* mini-css-extract-plugin: 分离css文件
+* clean-webpack-plugin: 删除打包文件
+* happypack: 实现多线程加速编译
+
+## webpack与grunt、gulp的不同
+
+webpack可以看做模块打包机，通过分析项目结构找到js模块以及一些其他浏览器不能直接运行的拓展语言，并将其转换为合适的格式供浏览器使用
+
+gulp/grunt是一种能够优化前端的开发流程的工具，webpack是一种模块化的解决方案
+
+他们工作方式也有很大差别：
+
+grunt和gulp工作方式是，在一个配置文件中，指名对某些文件进行编译，组合，压缩等任务的具体步骤
+
+webpack工作方式是，把项目当做一个整体，通过给定的入口，webpack将从这个文件开始找到项目的所有依赖文件，使用loaders处理，最后打包成一个或多个浏览器可识别的js文件
+
+一些轻量化任务可以用gulp来处理，例如把一个sass文件编译成css，或者单独打包css文件等
+
+grunt是基于任务和流的，找到一个或者一类文件，对其做一系列的链式操作，更新流上的数据，整条链式操作构成了一个任务，多个任务就构成了整个web的构建流程
+
+webpack是基于入口的，webpack会自动递归解析入口所需要加载的所有资源文件，然后用不同的loader来处理不同文件，用Plugin来扩展webpack功能。
+
+## webpack有哪些优点
+
+* 专注于模块化的项目，能做到开箱即用，一步到位
+* 可通过plugin扩展，完整好用又不是灵活
+* 使用场景不局限于web开发
+* 社区庞大活跃，经常引入紧跟时代发展的新特性
+* 良好的开发体验
+
+## wbepack缺点是什么
+
+只能用于模块化的项目
+
+## bundle、chunk、module是什么
+
+bundle: 是由webpack打包出来的文件
+chunk: 代码块，一个chunk由多个模块组合而成，用于代码的合并和分割
+module: 是开发中的单个模块，
