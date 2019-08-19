@@ -118,6 +118,22 @@
             box-sizing: border-box;
             background-color: bisque;
         }
+
+        /* 写法五-margin */
+        .way-5-left {
+            width: 200px;
+            height: 100%;
+            background-color: aqua;
+        }
+        .way-5-right-outside {
+            margin-left: -200px;
+            width: 100%;
+        }
+        .way-5-right {
+            margin-left: 200px;
+            height: 100%;
+            background-color: bisque;
+        }
     </style>
 </head>
 <body>
@@ -168,6 +184,21 @@
         <div class="way-4-main">
             <div class="way-4-left">1</div>
             <div class="way-4-right">2</div>
+        </div>
+    </div>
+    
+    <!-- 写法五-margin
+        右侧设置外层包裹div，margin-left:-200px，width: 100%;
+        右侧内层div设置margin-left:200px;
+        参考了三列的双飞翼布局，同时因为inline-block会有间距，所以左右侧标签必须连在一起写，中间不能有空格或者换行。
+    -->
+    <div class="way">
+        <h4 class="way-title">写法五-margin</h4>
+        <div class="way-4-main">
+            <div class="way-4-left">1</div>
+            <div class="way-5-right-outside">
+                <div class="way-5-right">2</div>
+            </div>
         </div>
     </div>
 
