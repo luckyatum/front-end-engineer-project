@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.flow-container {
+    padding: 20px;
+}
+
+.flow-list {
+    position: relative;
+    margin: 0 auto;
+}
+
+.flow-item {
+    position: absolute;
+    padding: 10px;
+    width: 250px;
+    border: 2px solid #e3e3e3;
+    box-shadow: 0 0 #e3e3e3 5px;
+    box-sizing: border-box;
+    transition: top 300ms linear, left 300ms linear;
+}
+
+.flow-item-img {
+    width: 100%;
+}
+
+.hide {
+    overflow: hidden;
+}
