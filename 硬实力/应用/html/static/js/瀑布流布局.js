@@ -2,13 +2,16 @@ $(function() {
     // 瀑布流
 
     var globel = {
+        instance: {
+            resizeTimeInstance: null, // 重绘定时器实例
+        },
         data: {
             imgs: [], // 图片地址数组
         },
         // 配置
         config: {
             imgPre: '../static/images/瀑布流布局/', // 图片地址前缀
-            animateMs: 300, // 动画执行毫秒
+            resizeTimeMs: 50, // 重绘定时器间隔毫秒
         },
     };
 
@@ -28,7 +31,13 @@ $(function() {
     // 绑定事件
     function bindEvent() {
         $(window).resize(function() {
-            refreshWaterFlow();
+            if (globel['instance']['resizeTimeInstance']) {
+                clearTimeout(globel['instance']['resizeTimeInstance']);
+            }
+
+            globel['instance']['resizeTimeInstance'] = setTimeout(function() {
+                refreshWaterFlow();
+            }, globel['config']['resizeTimeMs']);
         });
     };
 
