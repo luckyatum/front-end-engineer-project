@@ -61,3 +61,36 @@ webpack是基于入口的，webpack会自动递归解析入口所需要加载的
 bundle: 是由webpack打包出来的文件
 chunk: 代码块，一个chunk由多个模块组合而成，用于代码的合并和分割
 module: 是开发中的单个模块，
+
+## 什么是loader，什么是plugin
+
+loader：模块转换器，用于将模块转化成想要的内容
+plugin: 构建流程中的特定时机注入扩展逻辑，改变构建结果，用来自定义webpack打包过程的方式；
+
+每个插件都含有apply方法，通过该方法参与整个webpack打包的流程
+
+## 什么是模块热更新
+
+是webpack的一个功能，可以使得代码修改后不用刷新浏览器就可以更新，高级版的自动刷新浏览器；
+
+devServer中通过hot属性可以控制热更新；
+
+```js
+const config = {
+    devServer: {
+        hot: true
+    } 
+};
+```
+
+## 什么是tree-shaking
+
+可以用来剔除js中不用的死代码，依赖静态的es6模块化语法；
+
+css中使用需要导入Purify-css
+
+## 通过webpack处理长缓存
+
+浏览器用户访问页面时候，为了访问速度，会对用户访问的静态资源进行缓存，每一次代码更新后，都需要浏览器下载新代码；
+
+最简单方式是引入新的文件和名称，在webpack中可以在output中输出文件指定chunkName
