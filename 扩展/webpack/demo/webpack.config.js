@@ -1,28 +1,26 @@
-const Path = require('path');
+const path = require('path');
 
 module.exports = {
-    mode: 'development',
     entry: './src/index.js',
-    resolveLoader: {
-      modules: ['node_modules', './loaders']
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist')
     },
     module: {
-      rules: [
-        {
-          test: /\.js$/,
-          use: [
+        rules: [
             {
-              loader: 'replaceLoader',
-              options: {
-                  name: 'oujiamin'
-              }
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
             }
-          ]
-        }
-      ]
-    },
-    output: {
-      path: Path.resolve(__dirname, 'dist'),
-      filename: '[name].js'
+        ]
     }
-  }
+};
