@@ -45,25 +45,18 @@ class Board extends React.Component {
   }
 
   render() {
+    let rows = [];
+    for(let i = 0;i < 3;i++) {
+      let squares = [];
+      for(let j = 0;j < 3;j++) {
+        squares.push(this.renderSquare(i * (j + 1)));
+      }
+      rows.push(<div className="board-row">{squares}</div>);
+    }
+
     return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    )
+      <div>{rows}</div>
+    );
   }
 }
 
@@ -75,7 +68,8 @@ class Game extends React.Component {
         squares: Array(9).fill(null)
       }],
       stepNumber: 0,
-      xIsNext: true
+      xIsNext: true,
+      activeHistory: null
     };
   }
 
@@ -87,9 +81,12 @@ class Game extends React.Component {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+
     this.setState({
       history: history.concat([{
         squares: squares,
+        coorX: parseInt(i / 3),
+        coorY: i % 3,
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -99,6 +96,7 @@ class Game extends React.Component {
   jumpTo(step) {
     this.setState({
       stepNumber: step,
+      activeHistory: step,
       xIsNext: (step % 2) === 0
     });
   }
@@ -110,12 +108,12 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move : 
+        'Go to move #' + move + ('(' + step.coorX + ', ' + step.coorY + ')') : 
         'Go to Start';
 
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className={move === this.state.activeHistory ? 'font-bold' : ''} onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
