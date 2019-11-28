@@ -104,3 +104,18 @@ containerd通过指挥runc来创建新容器，事实上，每次创建容器它
 
 * 保持所有的STDIN和STDOUT流是开启状态，从而当daemon重启的时候，容器不会因为管道的关闭而终止；
 * 将容器的退出状态反馈给daemon;
+
+## 在Linux中的实现
+
+Linux系统中，前面提到的组件由二进制来实现，具体包括dockerd（docker-daemon）、docker-containerd(containerd)、docker-containerd-shim(shim)和docker-runc(runc)。
+
+## daemon的作用
+
+当所有的执行逻辑和运行时代码从daemon中拆解出来并模块化之后，daemon中还剩什么。目前，daemon的主要功能包括镜像管理、镜像构建、REST API、身份验证、安全、核心网络和编排；
+
+## 小结
+
+基于OCI的开放标准，Docker引擎采用模块化设计；
+Docker daemon实现了Docker API，该API是一套功能丰富、基于版本的HTTP API，并且随着其他Docker项目的开发而演化；
+containerd完成对容器的操作，containerd由docker公司开发，并贡献给了CNCF。它可以被看作是负责容器生命周期相关操作的容器管理器，小巧而轻量，可被其他项目或第三方工具使用。
+containerd需要指挥与OCI兼容的容器进行时来创建容器，默认情况下，Docker使用runc来作为其默认的容器进行时，runc已经是OCI容器运行时规范的标准实现了。
