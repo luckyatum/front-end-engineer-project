@@ -139,4 +139,9 @@ percy
 
 ### 容器的重启策略
 
-重启策略应用于容器
+重启策略应用于每个容器，用于声明容器被停止后的行为。
+目前重启策略允许的参数如下：
+
+1.always-一直尝试重启，除非明确使用docker container stop命令停止容器，否则会一直重启容器；在docker daemon重启之后，带有always参数的容器也会重启；
+2.unless-stopped-处于stopped状态的容器，不会在daemon重启的时候被重启（always策略会）；
+3.on-failure策略会在容器退出，并且返回值不是0的时候重启容器；
