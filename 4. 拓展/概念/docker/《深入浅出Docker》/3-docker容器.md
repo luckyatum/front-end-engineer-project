@@ -145,3 +145,14 @@ percy
 1.always-一直尝试重启，除非明确使用docker container stop命令停止容器，否则会一直重启容器；在docker daemon重启之后，带有always参数的容器也会重启；
 2.unless-stopped-处于stopped状态的容器，不会在daemon重启的时候被重启（always策略会）；
 3.on-failure策略会在容器退出，并且返回值不是0的时候重启容器；
+
+## 容器——命令
+
+* docker container run 是启动新容器的命令，接收镜像和命令作为参数，如：docker container run -it ubuntu /bin/bash 表示启动ubuntu容器且运行bash shell；
+* Ctrl PQ 组合命令可以从容器终端中退出到主机终端；
+* docker container ls 列出所有运行的容器，添加 -a 标记还可以看到处于停止的容器；
+* docker container exec 允许用户在运行状态的容器中，启动一个新进程；通常该命令用于在主机中连接到容器终端，如：docker container exec -it container-name或container-id bash；
+* docker container stop 会停止运行中的容器，并将状态直为Exited(0)；该命令会先发送SIGTERM信号给容器内PID为1的进程，如果进程没有在10s内得到清理并停止运行，就会再发送SIGKILL信号来强制停止容器；
+* docker container start 会重启处于停止（Exited）状态的容器，可以在start命令中指定容器名称或id;
+* docker container rm 会删除停止的容器，可以通过容器名称或者ID来指定要删除的容器；推荐先用docker container stop 停止容器后再用 docker container rm 删除容器；因为该命令会直接向运行中的容器发送SIGKILL信号杀死进程，不会给进程一个退出的缓冲时间；
+* docker container inspect 命令会显示容器的配置细节和运行时信息，该命令接收容器名称和id;
