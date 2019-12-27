@@ -25,4 +25,21 @@ swarm最小调度单位是任务（task），目前可以指单一的容器；
 
 ...
 
-## 
+## demo
+
+使用docker machine创建多个docker
+
+* docker-machine create -d virtualbox manager
+创建一个虚拟Docker主机
+* docker-machine ssh manager | docker-machine env manager
+进入虚拟主机终端
+* docker swarm init —advertise-addr 192.168.99.100
+初始化一个swarm集群，并使该主机成为管理节点
+* docker-machine create -d virtualbox worker1
+新增一个虚拟主机worker1
+* docker swarm join \
+    —token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
+    192.168.99.100:2377
+把该主机加入集群
+* docker node ls
+管理节点可以用该命令查看当前集群中的节点列表
