@@ -39,7 +39,7 @@ Array.prototype.selfMap = selfMap;
 [1, 2, 3].map((item) => {
     return item +1;
 }, {
-    
+
 })
 var selfMap2 = function(fn, context) {
     var arr = Array.prototype.slice.call(this); // 浅拷贝一个数组
