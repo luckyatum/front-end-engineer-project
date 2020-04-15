@@ -260,3 +260,109 @@
     ```
 
 完了。
+
+## React hooks
+
+如果将上面BookData的实现方式，改为react hooks的实现，是怎样的呢？我们先来看下原本的class实现方式的代码：
+
+    ```js
+        import React from 'react';
+
+        export class BookData extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    books: []
+                };
+            }
+
+            componentDidMount() {
+                getBooksData();
+            }
+
+            async getBooksData() {
+                const books = await axios.get();
+                this.setState({ books });
+            }
+
+            render() {
+                return '这里没有东西可以渲染。'
+            }
+        }
+    ```
+
+这里我们将其改成hooks方式，代码如下：
+
+    ```js
+    import React, { useState, useEffect } from 'react';
+
+    export const useBookData = () => {
+        const [ books, setBooks ] = useState([]);
+
+        useEffect(() => {
+            getBooksData();
+        });
+
+        async getBooksData() {
+            const books = await axios.get();
+            setBooks(books);
+        }
+
+        return [ books, getBooksData ];
+    };
+    ```
+
+我们可以看到，大部分代码都是一样的，只不过引入了两个hooks，分别是useState和useEffect，useState可以生成组件的内部状态数据，useEffect在组件内部状态发生变化时会执行；另外名称我们从BookData变成了useBookData，这是react hooks的一个约定，表示该组件内部是使用了react hooks的；还有一个变化就是我们直接把books作为结果返回给外面，也就是说只要调用这个函数，就能得到一个已经在维护状态的books数据。
+
+下面是如何使用这个函数式组件：
+
+    ```js
+    // BookList组件
+    function BookList() {
+        const [ books ] = useBooksData();
+
+        return (
+            <ul>
+                {
+                    books.map(book => (
+                        <li key={book.id}>{book.name}</li>
+                    ))
+                }
+            </ul>
+        )
+    }
+
+    // BookManage组件
+    function BookManage() {
+        const [ books, getBooksData ] = useBooksData();
+
+        const handleDelete = async (books) => {
+            await deleteBook({ id: book.id });
+            // @todo 这里需要重新获取书籍列表
+            getBooksData();
+        }
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>书籍名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                {
+                    books.map(book => (
+                        <tr key={book.id}>
+                            <td>{book.name}</td>
+                            <td>
+                                <button onClick={() => handleDelete(book)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))
+                }
+            </table>
+        )
+    }
+    ```
+
+可以看到，利用hooks可以很方便的将公共逻辑抽离，并且很简洁地复用到其他组件中去。
