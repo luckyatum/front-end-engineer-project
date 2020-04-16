@@ -27,17 +27,16 @@
 }
 
 .box {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
     border-radius: 8px;
     padding: 8px;
     background-color: #000;
 }
 
 .item {
-    margin: 1px;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     background-color: #fff;
     border-radius: 50%;
 }
