@@ -1,7 +1,5 @@
-import combineRouters from 'koa-combine-routers'
+import combineRouters from "koa-combine-routers";
 
-import demoRouter from './demoRouter'
+import publicRouter from "./publicRouter";
 
-export default combineRouters(
-  demoRouter
-)
+export default combineRouters(publicRouter);
