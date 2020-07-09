@@ -81,9 +81,81 @@
 9. React如何进行组件、逻辑复用？
 
     * 高阶组件；
-    * 渲染属性；
+    * render props
     * react-hooks；
 
 10. mixin、hoc、render props、react-hooks的优劣如何？
 
-11. 
+    Mixin的缺陷：
+
+    * 组件与Mixin之间存在隐式依赖（Mixin依赖组件的某个方法，但是定义时并不知道这种依赖）
+    * 多个Mixin之间存在冲突（比如定义了相同的State字段）
+    * Mixin倾向于增加更多状态，降低了应用的可预测性；
+    * 隐式依赖导致依赖关系不透明，维护成本和理解成本增加；
+
+    HOC相比Mixin的优势：
+
+    * HOC通过外层组件通过props影响内层组件的状态，而不是直接改变其state，不存在冲突干扰；
+    * 不同于Mixin的打平+合并，HOC具有天然的层级结构；
+
+    HOC的缺陷：
+
+    * 扩展性缺陷：HOC无法从外部访问子组件的State因此无法通过shouldComponentUpdate滤掉不必要的更新；
+    * Ref传递问题：Ref被隔断；
+    * Wrapper Hell：HOC可能出现多层包裹组件的情况；
+    * 命名冲突：如果高阶组件多层嵌套，没有使用命名空间的话会产生冲突；
+    * 不可见性：HOC相当于在原有组件外层再包装一个组件，无法得知外层的包装是啥；
+
+    Render Props优点：
+
+    * 上述HOC缺陷Render Props都可以解决；
+
+    Render Props缺陷：
+
+    * 使用繁琐：HOC使用只需要借助装饰器语法通常一行代码即可复用；
+    * 嵌套过深：Render Props虽然摆脱了组件多层嵌套的问题，但是转化为了函数回调的嵌套；
+
+    React Hooks优点
+
+    * 简洁：解决了HOC和Render Props的嵌套缺陷；
+    * 解耦：可以更方便地做到UI和状态分离，做到更彻底的解耦；
+    * 组合：Hooks中可以引用另外的hooks形成新的Hooks，千变万化；
+    * 函数友好：为函数组件而生，从而解决了类组件的几大问题：
+
+        * this指向错误；
+        * 分隔在不同的生命周期中的逻辑使得代码难以维护；
+        * 代码复用成本高（高阶组件容易使代码量剧增）；
+
+    React Hooks缺点
+
+    * 额外的学习成本；
+    * 写法上有限制，不能出现在条件、循环中，并且写法限制增加了重构成本；
+    * 破坏了PureComponent、React.memo浅比较的性能优势；
+    * 在闭包场景可能会引用到旧的state、props；
+    * 内部实现上不直观；
+    * React.memo不能完全替代shouldComponentUpdate；
+
+11. 如何理解fiber？
+
+    fiber是一种基于浏览器的单线程调度算法；
+
+    React16之前，reconcilation算法实际上是递归，想要中断递归比较困难，React16开始用循环来代替递归；
+
+    fiber：一种将reconcilation拆分成无数个小任务的算法，可以随时停止、恢复；
+
+12. Redux工作流程？
+
+    核心概念：
+
+    * Store：保存数据的地方，整个应用只能有一个Store;
+    * State: Store对象包含所有数据，如果想得到某个时点的数据，就要对Store产生快照，这种时点的数据集合，就叫做State；
+    * Action: State的变化，会导致View的变化。但是，用户接触不到State，只能接触View，所以，State的变化必须是View导致的，Action就是View发出通知，表示State要发生的变化；
+    * Action Creator: View要发送多少种消息，就会有多少种Action；如果都手写，会很麻烦；所以我们定义一个函数来生成Action；
+    * Reducer：Store收到Action以后，必须给出一个新的State，这种Store的计算过程就叫Reducer；
+    * dispatch: 是View发出Action的唯一方法；
+
+    工作流程：
+
+    * 用户通过View发出Action，使用dispatch方法；
+    * Store自动调用Reducer，传入两个参数：State和收到的Action，Reducer会返回新的State；
+    * State一旦有变化，Store就会调用监听函数，来更新View;
