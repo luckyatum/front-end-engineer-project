@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/ali/workspace/self/front-end-engineer-project/4. 拓展/c#/c#.csproj": {}
+  },
+  "projects": {
+    "/Users/ali/workspace/self/front-end-engineer-project/4. 拓展/c#/c#.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ali/workspace/self/front-end-engineer-project/4. 拓展/c#/c#.csproj",
+        "projectName": "c#",
+        "projectPath": "/Users/ali/workspace/self/front-end-engineer-project/4. 拓展/c#/c#.csproj",
+        "packagesPath": "/Users/ali/.nuget/packages/",
+        "outputPath": "/Users/ali/workspace/self/front-end-engineer-project/4. 拓展/c#/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ali/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
