@@ -1,6 +1,5 @@
 # [35 道咱们必须要清楚的 React 面试题](https://juejin.im/post/5dc20a4ff265da4d4e30040b)
 
-
 1. 什么是虚拟DOM?
 
     虚拟DOM是真实DOM在内存中的表示。UI的表示形式保存在内存中，并与实际的DOM同步；
