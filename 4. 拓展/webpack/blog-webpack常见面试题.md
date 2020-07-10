@@ -1,6 +1,6 @@
 # [webpack面试题汇总](https://www.jianshu.com/p/bb1e76edc71e)
 
-## 什么是webpack
+## 什么是webpakc
 
 一个打包模块化javaScript的工具，webpack里一切文件皆模块。通过loader转换文件，通过plugin注入钩子，最后输出由多个模块组合成的文件。
 

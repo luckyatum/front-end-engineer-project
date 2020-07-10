@@ -1,4 +1,7 @@
 const config = {
-    entry: './src/index.js'
+    entry: {
+        main: '.src/index.js',
+        app: '.src/app.js'
+    }
 }
 module.exports = config;

@@ -115,7 +115,7 @@ $(function () {
       var imgIndex = createRandom(0, imgs.length)
 
       // 把该index对应的序号移除，并且把图片地址保存起来
-      imgsSrc.push('test-(' + imgs[imgIndex] + ').jpg')
+      imgsSrc.push('image(' + imgs[imgIndex] + ').jpg')
       imgs.splice(imgIndex, 1)
     }
 
