@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>切角效果</title>
+  <style>
+    .main {
+      margin: 200px;
+      padding: 30px;
+      width: 300px;
+      line-height: 30px;
+      color: #fff;
+      background: url('./bg.jpg') no-repeat;
+      background-size: contain;
+      background-color: #58a;
+      clip-path: polygon(
+        20px 0,
+        calc(100% - 20px) 0,
+        100% 20px,
+        100% calc(100% - 20px),
+        calc(100% - 20px) 100%,
+        20px 100%,
+        0 calc(100% - 20px),
+        0 20px
+      );
+    }
+  </style>
+</head>
+<body>
+  <div class="main">CSS裁切路径最神奇的地方在于我们可以同时使用百分比数值(它会以元素自身的宽高作为基数度进行换算)和绝对长度值，从而提供巨大的灵活性。</div>
+</body>
+</html>
