@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>半透明边框</title>
+  <style>
+  .main {
+    margin: 0 auto;
+    padding: 100px;
+    width: 500px;
+    height: 500px;
+    background: url('./bg.jpg') no-repeat center center;
+    background-size: cover;
+    box-sizing: border-box;
+  }
+  .content {
+    padding: 20px;
+    font-size: 30px;
+    border: 10px solid rgba(255, 255, 255, 0.5);
+    background-clip: padding-box;
+    background-color: #fff;
+  }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="content">
+      CSS Secrets: Better Solutions to Everyday Web Design Problems
+    </div>
+  </div>
+</body>
+</html>
