@@ -6,23 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>垂直居中方式总结</title>
     <style>
-        #out {
-            position: relative;
-            width: 600px;
-            height: 300px;
-            background-color: aqua;
-        }
-        #in {
-            width: 50%;
-            height: 100%;
-            line-height: 300px;
-            background-color: yellow;
-        }
+    .way {
+        margin-top: 100px;
+        width: 100%;
+        height: 500px;
+        min-width: 700px;
+    }
+
+    .way-title {
+        margin-bottom: 10px;
+        height: 20px;
+        line-height: 20px;
+    }
+    .way-left {
+        height: 100%;
+        background-color: aqua;
+    }
+    .way-center {
+        height: 100%;
+        background-color: yellow;
+    }
+    .way-right {
+        height: 100%;
+        background-color: bisque;
+    }
+    .way-main {
+        width: 100%;
+        height: 470px;
+        border: 10px solid pink;
+        box-sizing: border-box;
+    }
+    .way-left {
+        display: inline-block;
+        width: 200px;
+    }
+    .way-center {
+        display: inline-block;
+        width: calc(100% - 500px);
+    }
+    .way-right {
+        display: inline-block;
+        width: 300px;
+    }
     </style>
 </head>
 <body>
-    <div id="out">
-        <div id="in">叔大婶dasda大叔大婶sd</div>
+    <!-- 方法六-inline-block
+        left设置display:inline-block;width:200px;
+        right设置display:inline-block;width:300px;
+        center设置display:inline-block;width用calc()计算得出
+        因为inline-block元素之间有空格或者换行的话会导致有间距，所以dom节点之间要删除换行和空格
+    -->
+    <div class="way">
+        <h4 class="way-title">方法六-inline-block</h4>
+
+        <div class="way-main">
+            <div class="way-left">左</div><div class="way-center">中</div><div class="way-right">右</div>
+        </div>
     </div>
 </body>
 </html>
