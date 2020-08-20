@@ -19,7 +19,7 @@ create table idcard
 (
     id int primary key,
     city varchar(40),
-    constraint id_FK foreign key(id) references person(id)  
+    constraint id_FK foreign key(id) references person(id)
 );
 ```
 
