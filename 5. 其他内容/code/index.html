@@ -25,10 +25,41 @@
 </head>
 
 <body>
-    <div class="main">
-        <div class="inside"></div>
-        <div class="inside-no"></div>
+    <div id='parent'>
+        <div id='son'>
+            <div id='grandson'>点击</div>
+        </div>
     </div>
+    <script>
+        var p = document.getElementById('parent');
+        var s = document.getElementById('son');
+        var g = document.getElementById('grandson');
+
+        p.addEventListener('click', function () {
+            console.log('我是父节点-捕获阶段');
+        }, true)
+
+        s.addEventListener('click', function () {
+            console.log('我是子节点-捕获阶段');
+        }, true)
+
+        g.addEventListener('click', function () {
+            console.log('我是孙节点-捕获阶段');
+        }, true)
+
+        p.addEventListener('click', function () {
+            console.log('我是父节点-冒泡阶段');
+        })
+
+        s.addEventListener('click', function () {
+            console.log('我是子节点-冒泡阶段');
+        })
+        
+
+        g.addEventListener('click', function () {
+            console.log('我是孙节点-冒泡阶段');
+        })
+    </script>
 </body>
 
 </html>
