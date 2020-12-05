@@ -1,0 +1,254 @@
+<!-- 三列布局-左右侧固定宽度，中间自适应 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三列布局-左右侧固定宽度，中间自适应</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .way {
+            margin-top: 100px;
+            width: 100%;
+            height: 500px;
+            min-width: 700px;
+        }
+        .way:first-child {
+            margin-top: 50px;
+        }
+
+        .way-title {
+            margin-bottom: 10px;
+            height: 20px;
+            line-height: 20px;
+        }
+        .way-left {
+            height: 100%;
+            background-color: aqua;
+        }
+        .way-center {
+            height: 100%;
+            background-color: yellow;
+        }
+        .way-right {
+            height: 100%;
+            background-color: bisque;
+        }
+
+        /* 方法一-浮动 */
+        .way-1-main {
+            width: 100%;
+            height: 470px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-1-left {
+            float: left;
+            width: 200px;
+        }
+        .way-1-right {
+            float: right;
+            width: 300px;
+        }
+
+        /* 方法二-绝对定位 */
+        .way-2-main {
+            position: relative;
+            width: 100%;
+            height: 470px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-2-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+        }
+        .way-2-center {
+            padding: 0 300px 0 200px;
+        }
+        .way-2-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 300px;
+        }
+
+        /* 方法三-绝对定位2 */
+        /* .way-3-main {
+            position: relative;
+            width: 100%;
+            height: 470px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-3-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+        }
+        .way-3-center {
+            margin: 0 300px 0 200px;
+        }
+        .way-3-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 300px;
+        } */
+
+        /* 方法四-flex */
+        .way-4-main {
+            display: flex;
+            width: 100%;
+            height: 470px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-4-left {
+            width: 200px;
+        }
+        .way-4-center {
+            flex: 1;
+        }
+        .way-4-right {
+            width: 300px;
+        }
+
+        /* 方法五-inline-block */
+        .way-5-main {
+            width: 100%;
+            height: 470px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
+        .way-5-left {
+            display: inline-block;
+            width: 200px;
+        }
+        .way-5-center {
+            display: inline-block;
+            width: calc(100% - 500px);
+        }
+        .way-5-right {
+            display: inline-block;
+            width: 300px;
+        }
+
+        /* 方法六-圣杯布局 */
+        .way-6-main {
+            padding: 0 300px 0 200px;
+            height: 470px;
+            border: 10px solid pink;
+        }
+        .way-6-center {
+            float: left;
+            width: 100%;
+        }
+        .way-6-left {
+            float: left;
+            position: relative;
+            right: 200px;
+            margin-left: -100%;
+            width: 200px;
+        }
+        .way-6-right {
+            float: left;
+            width: 300px;
+            margin-right: -300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 方法一-浮动
+        html的dom结构顺序为class.left->class.right->class.center，也就是把中间自适应的dom节点放在最后
+        left设置float:left;设置宽度；
+        right设置float:right;设置宽度；
+        center设置display: block;
+    -->
+    <div class="way">
+        <h4 class="way-title">方法一-浮动</h4>
+        <div class="way-1-main">
+            <div class="way-1-left way-left">左</div>
+            <div class="way-1-right way-right">中</div>
+            <div class="way-1-center way-center">右</div>
+        </div>
+    </div>
+    <!-- 方法二-绝对定位
+        main设置position:relative;
+        left设置position:absolute;left:0;top:0;width:200px;
+        right设置position:absolute;right:0;top:0;width:300px;
+        center设置width:100%;padding:0 300px 0 200px;box-sizing:border-box;
+    -->
+    <div class="way">
+        <h4 class="way-title">方法二-绝对定位</h4>
+        <div class="way-2-main">
+            <div class="way-2-left way-left">1</div>
+            <div class="way-2-center way-center">2</div>
+            <div class="way-2-right way-right">3</div>
+        </div>
+    </div>
+    <!-- 方法三-绝对定位2
+        main设置position:relative;
+        left设置position:absolute;left:0;top:0;width:200px;
+        right设置position:absolute;right:0;top:0;width:300px;
+        ***center设置margin: 0 300px 0 200px;***
+    -->
+    <!-- <div class="way">
+        <h4 class="way-title">方法三-绝对定位2</h4>
+        <div class="way-3-main">
+            <div class="way-3-left way-left">1</div>
+            <div class="way-3-center way-center">2</div>
+            <div class="way-3-right way-right">3</div>
+        </div>
+    </div> -->
+    <!-- 方法四-flex
+        margin设置display:flex;
+        left设置width;
+        center设置flex:1;
+        right设置width;
+    -->
+    <div class="way">
+        <h4 class="way-title">方法四-flex</h4>
+        <div class="way-4-main">
+            <div class="way-4-left way-left">1</div>
+            <div class="way-4-center way-center">2</div>
+            <div class="way-4-right way-right">3</div>
+        </div>
+    </div>
+    <!-- 方法五-inline-block
+        left设置display:inline-block;width:200px;
+        right设置display:inline-block;width:300px;
+        center设置display:inline-block;width用calc()计算得出
+        因为inline-block元素之间有空格或者换行的话会导致有间距，所以dom节点之间要删除换行和空格
+    -->
+    <div class="way">
+        <h4 class="way-title">方法五-inline-block</h4>
+
+        <div class="way-5-main">
+            <div class="way-5-left way-left">1</div><div class="way-5-center way-center">2</div><div class="way-5-right way-right">3</div>
+        </div>
+    </div>
+    <!-- 方法六-圣杯布局
+        父元素设置padding: 0 300px 0 200px;
+        center标签设置在dom结构最前方，设置width: 100%;float: left;
+        left设置float:left;margin-left:-100%;position:relative;right:200px;width:200px;
+        right设置float:right;margin-right:-150px;
+    -->
+    <div class="way">
+        <h4 class="way-title">方法六-圣杯布局</h4>
+
+        <div class="way-6-main">
+            <div class="way-6-center way-center">2</div>
+            <div class="way-6-left way-left">1</div>
+            <div class="way-6-right way-right">3</div>
+        </div>
+    </div>
+</body>
+</html>

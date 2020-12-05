@@ -120,14 +120,24 @@
         }
 
         /* 写法五-margin */
+        .way-5-main {
+            width: 100%;
+            height: 470px;
+            min-width: 220px;
+            border: 10px solid pink;
+            box-sizing: border-box;
+        }
         .way-5-left {
+            display: inline-block;
             width: 200px;
             height: 100%;
             background-color: aqua;
         }
         .way-5-right-outside {
+            display: inline-block;
             margin-left: -200px;
             width: 100%;
+            height: 100%;
         }
         .way-5-right {
             margin-left: 200px;
@@ -194,9 +204,8 @@
     -->
     <div class="way">
         <h4 class="way-title">写法五-margin</h4>
-        <div class="way-4-main">
-            <div class="way-4-left">1</div>
-            <div class="way-5-right-outside">
+        <div class="way-5-main">
+            <div class="way-5-left">1</div><div class="way-5-right-outside">
                 <div class="way-5-right">2</div>
             </div>
         </div>

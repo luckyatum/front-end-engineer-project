@@ -79,7 +79,7 @@ devServer中通过hot属性可以控制热更新；
 const config = {
     devServer: {
         hot: true
-    } 
+    }
 };
 ```
 
