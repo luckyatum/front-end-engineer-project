@@ -1,1 +1,3 @@
-console.log('hello webpack');
+import { add } from './app'
+
+add(1,2)
