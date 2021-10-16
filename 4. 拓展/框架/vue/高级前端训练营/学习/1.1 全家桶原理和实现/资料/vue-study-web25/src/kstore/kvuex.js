@@ -6,13 +6,29 @@ class Store {
   constructor(options) {
     // 1.选项处理
     // this.$options = options
-    this._mutations = options.mutations
-    this._actions = options.actions
-    // 2.响应式state
-    this._vm = new Vue({
-      data: {
-        $$state: options.state
+    const store = this
+    store._mutations = options.mutations
+    store._actions = options.actions
+    store.getters = {}
+    const computed = {}
+
+    for (let [key, fn] of Object.entries(options.getters)) {
+      computed[key] = function() {
+        return fn(store.state)
       }
+      Object.defineProperty(store.getters, key, {
+        get() {
+          return store._vm[key]
+        }
+      })
+    }
+
+    // 2.响应式state
+    store._vm = new Vue({
+      data: {
+        $$state: options.state,
+      },
+      computed
     })
 
     this.commit = this.commit.bind(this)
